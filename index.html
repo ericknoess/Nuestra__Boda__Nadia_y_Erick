@@ -22,7 +22,7 @@
     
     <style>
        /* ============================================================================
-           LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V7.2 (SCROLL TIMING FIX)
+           LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V7.3 (DOM FLOW FIX)
           ============================================================================ */
        :root {
            --bg-marfil: #F4F0EA;       
@@ -111,8 +111,10 @@
 
        /* ============================================================================
           CAPÍTULO III: NUESTRO CAMINO
+          (FIX: Removemos display:flex y overflow:hidden para que el bloque herede el pin-spacer exacto)
           ============================================================================ */
-       .journey-section { position: relative; width: 100%; background-color: var(--bg-marfil-alt); z-index: 2; overflow: hidden; display: flex; flex-direction: column; }
+       .journey-section { position: relative; width: 100%; background-color: var(--bg-marfil-alt); z-index: 2; }
+       
        .journey-header { width: 100%; padding: clamp(5rem, 10vh, 7rem) 1.5rem 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; z-index: 10; position: relative; background-color: transparent; }
        .journey-header .chapter-tag { margin-bottom: 1rem; color: var(--bronce-mate); opacity: 1; transform: none; }
        
@@ -122,14 +124,13 @@
        .gallery-photo { width: 100%; height: 85vh; object-fit: cover; filter: grayscale(60%) sepia(15%) contrast(110%); box-shadow: 0 20px 50px rgba(107, 76, 45, 0.1); border-radius: 4px; }
 
        /* ============================================================================
-          CAPÍTULO IV: COORDENADAS (Espacio en Blanco + Pista Ampliada)
+          CAPÍTULO IV: COORDENADAS
           ============================================================================ */
-       #chapter-4 { position: relative; width: 100%; height: 500vh; margin-top: 25vh; }
+       #chapter-4 { position: relative; width: 100%; height: 500vh; margin-top: 25vh; z-index: 2; background-color: var(--bg-marfil); }
        @media (max-width: 768px) { #chapter-4 { height: 340vh; margin-top: 20vh; } }
        
        .sticky-container { position: -webkit-sticky; position: sticky; top: 0; width: 100%; height: 100vh; height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding: 0 1rem; }
        
-       /* Nota: La iglesia arrancará con opacity seteada por GSAP.set para que fluya hacia arriba */
        .ethereal-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(70%) sepia(20%) contrast(115%) brightness(105%); opacity: 0; z-index: 0; }
        .vignette-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(244,240,234,0.85) 0%, rgba(244,240,234,0.4) 40%, rgba(244,240,234,0.1) 100%); z-index: 1; pointer-events: none; }
        #chapter-4 .chapter-tag { font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.45em; text-transform: uppercase; color: var(--bronce-mate); position: absolute; top: 15%; z-index: 10; }
