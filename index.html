@@ -22,7 +22,7 @@
     
     <style>
        /* ============================================================================
-           LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V7.3 (DOM FLOW FIX)
+           LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V7.4 (PERFORMANCE FIX)
           ============================================================================ */
        :root {
            --bg-marfil: #F4F0EA;       
@@ -111,7 +111,6 @@
 
        /* ============================================================================
           CAPÍTULO III: NUESTRO CAMINO
-          (FIX: Removemos display:flex y overflow:hidden para que el bloque herede el pin-spacer exacto)
           ============================================================================ */
        .journey-section { position: relative; width: 100%; background-color: var(--bg-marfil-alt); z-index: 2; }
        
@@ -205,7 +204,8 @@
             </span>
             <span class="audio-text font-meta">Audio</span>
         </button>
-        <audio id="ambient-track" loop preload="auto">
+        <!-- FIX: preload="metadata" evita que el archivo colapse el ancho de banda móvil al inicio -->
+        <audio id="ambient-track" loop preload="metadata">
             <source src="audio.mpeg" type="audio/mpeg" />
         </audio>
     </div>
@@ -248,7 +248,8 @@
         <!-- CAPÍTULO II: LA ESENCIA -->
         <section id="chapter-2" class="essence-section">
             <div class="majestic-photo-layer" aria-hidden="true">
-                <img src="los_dos.jpeg" alt="Nadia y Erick" class="majestic-ethereal-photo" id="cinematic-photo" />
+                <!-- FIX: loading="lazy" para liberar el thread inicial en 4G/3G -->
+                <img src="los_dos.jpeg" alt="Nadia y Erick" class="majestic-ethereal-photo" id="cinematic-photo" loading="lazy" />
             </div>
             <div class="solid-canvas-overlay" id="solid-canvas" aria-hidden="true"></div>
 
@@ -290,7 +291,7 @@
         </section>
 
         <!-- ==================================================================== -->
-        <!-- CAPÍTULO III: NUESTRO CAMINO (Header + Galería Horizontal)           -->
+        <!-- CAPÍTULO III: NUESTRO CAMINO -->
         <!-- ==================================================================== -->
         <section id="chapter-3" class="journey-section" aria-label="Nuestro Camino">
             
@@ -301,21 +302,23 @@
             
             <div class="horizontal-gallery-wrapper" id="horizontal-wrapper">
                 <div class="horizontal-gallery-container" id="horizontal-container">
-                    <div class="gallery-slide"><img src="foto1.jpg" alt="Memoria 1" class="gallery-photo" /></div>
-                    <div class="gallery-slide"><img src="foto2.jpg" alt="Memoria 2" class="gallery-photo" /></div>
-                    <div class="gallery-slide"><img src="foto3.jpg" alt="Memoria 3" class="gallery-photo" /></div>
-                    <div class="gallery-slide"><img src="foto4.jpg" alt="Memoria 4" class="gallery-photo" /></div>
+                    <!-- FIX: Lazy load de todo el carrusel -->
+                    <div class="gallery-slide"><img src="foto1.jpg" alt="Memoria 1" class="gallery-photo" loading="lazy" /></div>
+                    <div class="gallery-slide"><img src="foto2.jpg" alt="Memoria 2" class="gallery-photo" loading="lazy" /></div>
+                    <div class="gallery-slide"><img src="foto3.jpg" alt="Memoria 3" class="gallery-photo" loading="lazy" /></div>
+                    <div class="gallery-slide"><img src="foto4.jpg" alt="Memoria 4" class="gallery-photo" loading="lazy" /></div>
                 </div>
             </div>
         </section>
 
         <!-- ==================================================================== -->
-        <!-- CAPÍTULO IV: COORDENADAS (Scroll Físico Ampliado + Espacio de Respiro)-->
+        <!-- CAPÍTULO IV: COORDENADAS -->
         <!-- ==================================================================== -->
         <section id="chapter-4">
           <div class="sticky-container">
-            <img src="iglesia.jpeg" alt="Iglesia" class="ethereal-bg" id="bg-iglesia" />
-            <img src="jardin.jpeg" alt="Jardín" class="ethereal-bg" id="bg-jardin" />
+            <!-- FIX: Lazy load para imágenes parallax -->
+            <img src="iglesia.jpeg" alt="Iglesia" class="ethereal-bg" id="bg-iglesia" loading="lazy" />
+            <img src="jardin.jpeg" alt="Jardín" class="ethereal-bg" id="bg-jardin" loading="lazy" />
             <div class="vignette-overlay"></div>
 
             <div class="chapter-tag font-meta" id="ch-tag">Capítulo IV &bull; Ubicación</div>
@@ -391,12 +394,13 @@
 
             <!-- Video Sin Márgenes Horizontales -->
             <div class="cinematic-video-container" id="video-container">
-                <video id="save-date-video" class="save-date-video" autoplay loop muted playsinline>
+                <!-- FIX: Se añade preload="metadata" para evitar bloqueo del hilo inicial -->
+                <video id="save-date-video" class="save-date-video" autoplay loop muted playsinline preload="metadata">
                     <source src="save_the_date.mp4" type="video/mp4" />
                 </video>
                 <div class="video-overlay"></div>
                 <div class="video-action-wrapper fade-gallery">
-                    <button id="video-fullscreen-btn" class="video-play-btn">Save the Date</button>
+                    <button id="video-fullscreen-btn" class="video-play-btn">Ver video</button>
                 </div>
             </div>
 
@@ -412,7 +416,8 @@
 
         <!-- THE FINAL FRAME -->
         <section class="floral-closure-section" aria-hidden="true">
-            <img src="ramo.jpeg" alt="Detalle Floral" class="floral-closure-photo" />
+            <!-- FIX: Lazy load para la foto final -->
+            <img src="ramo.jpeg" alt="Detalle Floral" class="floral-closure-photo" loading="lazy" />
         </section>
 
     </div> 
