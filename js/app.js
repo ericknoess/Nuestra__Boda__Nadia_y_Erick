@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V7.2 (TIMELINE FIX & PAUSE)
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V7.5 (NETWORK RESILIENCE)
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -61,7 +61,12 @@ const videoBtn = document.getElementById('video-fullscreen-btn');
 let isAudioPlaying = false;
 let wasAmbientPlayingBeforeVideo = false;
 
+// FIX: Como este script y dependencias ya se cargaron, el sistema está listo.
+// Habilitamos el botón para el usuario y quitamos el estado de "Cargando..."
 if(enterBtn) {
+    enterBtn.textContent = "Ver Invitación";
+    enterBtn.removeAttribute('disabled');
+    
     enterBtn.addEventListener('click', () => {
         
         if(audioTrack && weddingConfig.audio.enabled) {
