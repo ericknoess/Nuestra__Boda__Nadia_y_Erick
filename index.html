@@ -16,17 +16,13 @@
     <meta property="og:url" content="https://ericknoess.github.io/Nuestra__Boda__Nadia_y_Erick/">
     <meta property="og:type" content="website">
     
-    <!-- FIX: Preconexión a los servidores de fuentes y CDNs para redes móviles lentas -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
     
     <style>
        /* ============================================================================
-           LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V7.5 (NETWORK RESILIENCE)
+           LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V7.3 (DOM FLOW FIX)
           ============================================================================ */
        :root {
            --bg-marfil: #F4F0EA;       
@@ -68,11 +64,7 @@
        .ceremonial-content { display: flex; flex-direction: column; align-items: center; text-align: center; }
        .gate-seal { font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 8vw, 2.4rem); letter-spacing: 0.65em; text-transform: uppercase; color: var(--bronce-mate); margin-bottom: 2.5rem; opacity: 0.85; }
        .gate-btn { background: transparent; border: 1px solid rgba(142,99,59,0.35); padding: 1rem 3.5rem; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--bronce-mate); cursor: pointer; transition: all 0.6s var(--ease-luxury); }
-       .gate-btn:hover:not(:disabled) { background-color: var(--bronce-mate); color: var(--bg-marfil); border-color: var(--bronce-mate); }
-       
-       /* FIX: Estilo para botón inactivo mientras descargan los scripts */
-       .gate-btn:disabled { opacity: 0.4; cursor: wait; border-color: rgba(142,99,59,0.15); animation: pulse-loading 2s infinite ease-in-out; }
-       @keyframes pulse-loading { 0% { opacity: 0.4; } 50% { opacity: 0.7; } 100% { opacity: 0.4; } }
+       .gate-btn:hover { background-color: var(--bronce-mate); color: var(--bg-marfil); border-color: var(--bronce-mate); }
 
        .audio-ui-layer { position: fixed; top: clamp(0.2rem, 2vw, 1rem); left: clamp(0.2rem, 2vw, 1rem); z-index: 100; pointer-events: none; opacity: 0; display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
        .audio-ui-layer.is-active { pointer-events: auto; }
@@ -119,6 +111,7 @@
 
        /* ============================================================================
           CAPÍTULO III: NUESTRO CAMINO
+          (FIX: Removemos display:flex y overflow:hidden para que el bloque herede el pin-spacer exacto)
           ============================================================================ */
        .journey-section { position: relative; width: 100%; background-color: var(--bg-marfil-alt); z-index: 2; }
        
@@ -199,8 +192,7 @@
     <div class="loader-screen" id="ceremonial-gate" aria-hidden="false">
       <div class="ceremonial-content" id="ceremonial-content">
           <div class="gate-seal">Nuestra Boda</div>
-          <!-- FIX: El botón nace desactivado y con texto de carga -->
-          <button id="enter-experience" class="gate-btn" disabled>Cargando experiencia...</button>
+          <button id="enter-experience" class="gate-btn">Ver Invitación</button>
       </div>
     </div>
 
@@ -213,7 +205,7 @@
             </span>
             <span class="audio-text font-meta">Audio</span>
         </button>
-        <audio id="ambient-track" loop preload="metadata">
+        <audio id="ambient-track" loop preload="auto">
             <source src="audio.mpeg" type="audio/mpeg" />
         </audio>
     </div>
@@ -256,7 +248,7 @@
         <!-- CAPÍTULO II: LA ESENCIA -->
         <section id="chapter-2" class="essence-section">
             <div class="majestic-photo-layer" aria-hidden="true">
-                <img src="los_dos.jpeg" alt="Nadia y Erick" class="majestic-ethereal-photo" id="cinematic-photo" loading="lazy" />
+                <img src="los_dos.jpeg" alt="Nadia y Erick" class="majestic-ethereal-photo" id="cinematic-photo" />
             </div>
             <div class="solid-canvas-overlay" id="solid-canvas" aria-hidden="true"></div>
 
@@ -298,7 +290,7 @@
         </section>
 
         <!-- ==================================================================== -->
-        <!-- CAPÍTULO III: NUESTRO CAMINO -->
+        <!-- CAPÍTULO III: NUESTRO CAMINO (Header + Galería Horizontal)           -->
         <!-- ==================================================================== -->
         <section id="chapter-3" class="journey-section" aria-label="Nuestro Camino">
             
@@ -309,21 +301,21 @@
             
             <div class="horizontal-gallery-wrapper" id="horizontal-wrapper">
                 <div class="horizontal-gallery-container" id="horizontal-container">
-                    <div class="gallery-slide"><img src="foto1.jpg" alt="Memoria 1" class="gallery-photo" loading="lazy" /></div>
-                    <div class="gallery-slide"><img src="foto2.jpg" alt="Memoria 2" class="gallery-photo" loading="lazy" /></div>
-                    <div class="gallery-slide"><img src="foto3.jpg" alt="Memoria 3" class="gallery-photo" loading="lazy" /></div>
-                    <div class="gallery-slide"><img src="foto4.jpg" alt="Memoria 4" class="gallery-photo" loading="lazy" /></div>
+                    <div class="gallery-slide"><img src="foto1.jpg" alt="Memoria 1" class="gallery-photo" /></div>
+                    <div class="gallery-slide"><img src="foto2.jpg" alt="Memoria 2" class="gallery-photo" /></div>
+                    <div class="gallery-slide"><img src="foto3.jpg" alt="Memoria 3" class="gallery-photo" /></div>
+                    <div class="gallery-slide"><img src="foto4.jpg" alt="Memoria 4" class="gallery-photo" /></div>
                 </div>
             </div>
         </section>
 
         <!-- ==================================================================== -->
-        <!-- CAPÍTULO IV: COORDENADAS -->
+        <!-- CAPÍTULO IV: COORDENADAS (Scroll Físico Ampliado + Espacio de Respiro)-->
         <!-- ==================================================================== -->
         <section id="chapter-4">
           <div class="sticky-container">
-            <img src="iglesia.jpeg" alt="Iglesia" class="ethereal-bg" id="bg-iglesia" loading="lazy" />
-            <img src="jardin.jpeg" alt="Jardín" class="ethereal-bg" id="bg-jardin" loading="lazy" />
+            <img src="iglesia.jpeg" alt="Iglesia" class="ethereal-bg" id="bg-iglesia" />
+            <img src="jardin.jpeg" alt="Jardín" class="ethereal-bg" id="bg-jardin" />
             <div class="vignette-overlay"></div>
 
             <div class="chapter-tag font-meta" id="ch-tag">Capítulo IV &bull; Ubicación</div>
@@ -399,7 +391,7 @@
 
             <!-- Video Sin Márgenes Horizontales -->
             <div class="cinematic-video-container" id="video-container">
-                <video id="save-date-video" class="save-date-video" autoplay loop muted playsinline preload="metadata">
+                <video id="save-date-video" class="save-date-video" autoplay loop muted playsinline>
                     <source src="save_the_date.mp4" type="video/mp4" />
                 </video>
                 <div class="video-overlay"></div>
@@ -420,13 +412,13 @@
 
         <!-- THE FINAL FRAME -->
         <section class="floral-closure-section" aria-hidden="true">
-            <img src="ramo.jpeg" alt="Detalle Floral" class="floral-closure-photo" loading="lazy" />
+            <img src="ramo.jpeg" alt="Detalle Floral" class="floral-closure-photo" />
         </section>
 
     </div> 
 
-    <!-- FIX: CDN más estable para LATAM (jsDelivr) -->
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <!-- LENIS SMOOTH SCROLL CDN -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script type="module" src="js/app.js"></script>
